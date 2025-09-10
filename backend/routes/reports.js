@@ -187,6 +187,56 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// GET /api/reports/map - Get reports optimized for map display
+router.get('/map', async (req, res) => {
+  try {
+    const { 
+      severity, 
+      status, 
+      hazardType,
+      bounds // Format: "north,south,east,west"
+    } = req.query;
+
+    const query = {};
+    if (severity) query.severity = severity;
+    if (status) query.status = status;
+    if (hazardType) query.hazardType = hazardType;
+
+    // Add geographical bounds filter if provided
+    if (bounds) {
+      const [north, south, east, west] = bounds.split(',').map(parseFloat);
+      query['location.lat'] = { $gte: south, $lte: north };
+      query['location.lng'] = { $gte: west, $lte: east };
+    }
+
+    const reports = await HazardReport.find(query)
+      .select('location hazardType severity status description createdAt')
+      .sort({ createdAt: -1 })
+      .limit(1000); // Limit for performance
+
+    res.json({
+      reports,
+      count: reports.length,
+      summary: {
+        bySeverity: await HazardReport.aggregate([
+          { $match: query },
+          { $group: { _id: '$severity', count: { $sum: 1 } } }
+        ]),
+        byStatus: await HazardReport.aggregate([
+          { $match: query },
+          { $group: { _id: '$status', count: { $sum: 1 } } }
+        ]),
+        byHazardType: await HazardReport.aggregate([
+          { $match: query },
+          { $group: { _id: '$hazardType', count: { $sum: 1 } } }
+        ])
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // GET /api/reports/location/nearby - Get reports near a location
 router.get('/location/nearby', async (req, res) => {
   try {

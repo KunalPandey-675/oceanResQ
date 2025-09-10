@@ -15,6 +15,7 @@ import {
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useLanguage } from '../context/LanguageContext';
 import { analyticsAPI, reportsAPI, statusAPI, handleApiError } from '../services/api';
+import ReportsMap from '../components/map/ReportsMap';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -192,76 +193,74 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Recent Reports */}
+          {/* Reports Map */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
             className="lg:col-span-2"
           >
+            <ReportsMap height="600px" />
+          </motion.div>
+
+          {/* Sidebar with Recent Reports and System Status */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="space-y-6"
+          >
+            {/* Recent Reports */}
             <div className="card">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900 flex items-center">
+                <h2 className="text-lg font-bold text-gray-900 flex items-center">
                   <Activity className="h-5 w-5 mr-2 text-primary-600" />
                   {t('dashboard.recentReports')}
                 </h2>
-                <span className="text-sm text-gray-500">
-                  Latest hazard reports from the community
-                </span>
               </div>
 
-              <div className="space-y-4">
-                {recentReports.length > 0 ? recentReports.map((report) => (
-                  <div key={report._id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                    <div className="flex items-center space-x-4">
-                      <div className="p-2 bg-white rounded-lg shadow-sm">
-                        <Waves className="h-5 w-5 text-ocean-600" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900">{report.hazardType}</h3>
-                        <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <div className="space-y-3">
+                {recentReports.length > 0 ? recentReports.slice(0, 5).map((report) => (
+                  <div key={report._id} className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-gray-900 text-sm">{report.hazardType}</h3>
+                        <div className="flex items-center space-x-2 text-xs text-gray-500 mt-1">
                           <MapPin className="h-3 w-3" />
-                          <span>{report.location.details}</span>
-                          <span>•</span>
-                          <span>{formatTimeAgo(report.createdAt)}</span>
+                          <span className="truncate">{report.location.details}</span>
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          {formatTimeAgo(report.createdAt)}
                         </div>
                       </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(report.severity)}`}>
-                        {report.severity.replace(' Risk', '').replace(' Emergency', '')}
-                      </span>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(report.status)}`}>
-                        {report.status}
-                      </span>
+                      <div className="flex flex-col space-y-1 ml-2">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(report.severity)}`}>
+                          {report.severity.replace(' Risk', '').replace(' Emergency', '')}
+                        </span>
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(report.status)}`}>
+                          {report.status}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 )) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <Waves className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-                    <p>No recent reports available</p>
+                  <div className="text-center py-6 text-gray-500">
+                    <Waves className="h-8 w-8 mx-auto mb-2 text-gray-300" />
+                    <p className="text-sm">No recent reports</p>
                   </div>
                 )}
               </div>
             </div>
-          </motion.div>
 
-          {/* System Status */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="space-y-6"
-          >
             {/* Hazard Analytics */}
             <div className="card">
-              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
                 <TrendingUp className="h-5 w-5 mr-2 text-primary-600" />
                 {t('dashboard.hazardAnalytics')}
               </h2>
               
               {dashboardData?.hazardAnalytics && (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {dashboardData.hazardAnalytics.slice(0, 4).map((item) => (
                     <div key={item._id} className="flex items-center justify-between">
                       <span className="text-sm font-medium text-gray-700">{item._id}</span>
@@ -277,7 +276,7 @@ const Dashboard = () => {
 
             {/* System Status */}
             <div className="card">
-              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
                 <Activity className="h-5 w-5 mr-2 text-primary-600" />
                 {t('dashboard.systemStatus')}
               </h2>
