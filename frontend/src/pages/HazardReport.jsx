@@ -56,7 +56,6 @@ const HazardReport = () => {
   ];
 
   const emergencyNumbers = [
-    { country: 'USA', number: '911', flag: '🇺🇸' },
     { country: 'India', number: '112', flag: '🇮🇳' },
     { country: 'Coast Guard', number: '1-800-424-8802', flag: '🌊' }
   ];

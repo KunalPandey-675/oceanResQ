@@ -54,7 +54,7 @@ const Navbar = () => {
                 <Waves className="h-6 w-6 text-white" />
               </motion.div>
               <div>
-                <span className="text-2xl font-bold text-gradient">ResQ</span>
+                <span className="text-2xl font-bold text-gradient">OceanResQ</span>
                 <p className="text-xs text-gray-500 -mt-1">Ocean Safety</p>
               </div>
             </Link>

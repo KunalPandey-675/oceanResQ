@@ -19,77 +19,104 @@ const MultilingualSupport = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
 
   const supportedLanguages = [
-    { 
-      code: 'en', 
-      name: 'English', 
-      nativeName: 'English', 
-      flag: '🇺🇸', 
-      speakers: '1.5B+',
+    {
+      code: 'en',
+      name: 'English',
+      nativeName: 'English',
+      flag: '🇮🇳',
+      speakers: '125M+',
       coverage: '100%',
       features: ['Voice', 'Text', 'Emergency']
     },
-    { 
-      code: 'hi', 
-      name: 'Hindi', 
-      nativeName: 'हिन्दी', 
-      flag: '🇮🇳', 
+    {
+      code: 'hi',
+      name: 'Hindi',
+      nativeName: 'हिन्दी',
+      flag: '🇮🇳',
       speakers: '600M+',
       coverage: '95%',
       features: ['Voice', 'Text', 'Emergency']
     },
-    { 
-      code: 'es', 
-      name: 'Spanish', 
-      nativeName: 'Español', 
-      flag: '🇪🇸', 
-      speakers: '500M+',
+    {
+      code: 'ta',
+      name: 'Tamil',
+      nativeName: 'தமிழ்',
+      flag: '🇮🇳',
+      speakers: '75M+',
       coverage: '90%',
       features: ['Text', 'Emergency']
     },
-    { 
-      code: 'zh', 
-      name: 'Chinese', 
-      nativeName: '中文', 
-      flag: '🇨🇳', 
-      speakers: '1.1B+',
+    {
+      code: 'te',
+      name: 'Telugu',
+      nativeName: 'తెలుగు',
+      flag: '🇮🇳',
+      speakers: '80M+',
       coverage: '85%',
       features: ['Text', 'Emergency']
     },
-    { 
-      code: 'ar', 
-      name: 'Arabic', 
-      nativeName: 'العربية', 
-      flag: '🇸🇦', 
-      speakers: '400M+',
+    {
+      code: 'ml',
+      name: 'Malayalam',
+      nativeName: 'മലയാളം',
+      flag: '🇮🇳',
+      speakers: '38M+',
       coverage: '80%',
       features: ['Text', 'Emergency']
     },
-    { 
-      code: 'pt', 
-      name: 'Portuguese', 
-      nativeName: 'Português', 
-      flag: '🇧🇷', 
-      speakers: '260M+',
+    {
+      code: 'kn',
+      name: 'Kannada',
+      nativeName: 'ಕನ್ನಡ',
+      flag: '🇮🇳',
+      speakers: '44M+',
+      coverage: '80%',
+      features: ['Text', 'Emergency']
+    },
+    {
+      code: 'bn',
+      name: 'Bengali',
+      nativeName: 'বাংলা',
+      flag: '🇮🇳',
+      speakers: '230M+',
       coverage: '85%',
       features: ['Text', 'Emergency']
     },
-    { 
-      code: 'fr', 
-      name: 'French', 
-      nativeName: 'Français', 
-      flag: '🇫🇷', 
-      speakers: '280M+',
-      coverage: '90%',
+    {
+      code: 'mr',
+      name: 'Marathi',
+      nativeName: 'मराठी',
+      flag: '🇮🇳',
+      speakers: '83M+',
+      coverage: '80%',
       features: ['Text', 'Emergency']
     },
-    { 
-      code: 'ja', 
-      name: 'Japanese', 
-      nativeName: '日本語', 
-      flag: '🇯🇵', 
-      speakers: '125M+',
-      coverage: '80%',
-      features: ['Text']
+    {
+      code: 'gu',
+      name: 'Gujarati',
+      nativeName: 'ગુજરાતી',
+      flag: '🇮🇳',
+      speakers: '56M+',
+      coverage: '75%',
+      features: ['Text', 'Emergency']
+    },
+    {
+      code: 'or',
+      name: 'Odia',
+      nativeName: 'ଓଡ଼ିଆ',
+      flag: '🇮🇳',
+      speakers: '38M+',
+      coverage: '70%',
+      features: ['Text', 'Emergency']
+    },
+    {
+      code: 'kok',
+      name: 'Konkani',
+      nativeName: 'कोंकणी',
+      flag: '🇮🇳',
+      speakers: '2.5M+',
+      coverage: '60%',
+      features: ['Text', 'Emergency']
     }
   ];
 
@@ -104,15 +131,15 @@ const MultilingualSupport = () => {
       message: 'मरीना बीच पर ऊंची लहरें और तेज धाराएं रिपोर्ट की गई हैं। तुरंत तैराकी से बचें।',
       action: 'आपातकालीन सेवाओं को कॉल करें: 112'
     },
-    es: {
-      title: 'Alerta de Emergencia',
-      message: 'Se reportan olas altas y corrientes de resaca en Marina Beach. Evite nadar inmediatamente.',
-      action: 'Llame a Servicios de Emergencia: 112'
+    ta: {
+      title: 'அவசர எச்சரிக்கை',
+      message: 'மெரினா கடற்கரையில் உயர்ந்த அலைகள் மற்றும் வலுவான ஓட்டங்கள் கண்டறியப்பட்டுள்ளன. உடனடி நீச்சலை தவிர்க்கவும்.',
+      action: 'அவசர சேவையை அழைக்கவும்: 112'
     },
-    zh: {
-      title: '紧急警报',
-      message: '玛丽娜海滩报告有大浪和离岸流。请立即避免游泳。',
-      action: '拨打紧急服务电话：110'
+    bn: {
+      title: 'জরুরি সতর্কতা',
+      message: 'মেরিনা বিচে উচ্চ তরঙ্গ এবং প্রবল স্রোত রিপোর্ট করা হয়েছে। অবিলম্বে সাঁতার থেকে বিরত থাকুন।',
+      action: 'জরুরি পরিষেবায় কল করুন: 112'
     }
   };
 

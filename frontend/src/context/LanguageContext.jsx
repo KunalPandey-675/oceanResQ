@@ -15,7 +15,7 @@ const translations = {
     },
     // Landing Page
     landing: {
-      title: 'ResQ',
+      title: 'OceanResQ',
       subtitle: 'Integrated Platform for Crowdsourced Ocean Hazard Reporting',
       description: 'Real-time monitoring and analysis of ocean hazards through community reporting and social media analytics',
       getStarted: 'Get Started',
@@ -108,7 +108,7 @@ const translations = {
     },
     // Landing Page
     landing: {
-      title: 'ResQ',
+      title: 'OceanResQ',
       subtitle: 'समुद्री खतरा रिपोर्टिंग और सोशल मीडिया एनालिटिक्स का एकीकृत प्लेटफॉर्म',
       description: 'सामुदायिक रिपोर्टिंग और सोशल मीडिया एनालिटिक्स के माध्यम से समुद्री खतरों की रीयल-टाइम निगरानी और विश्लेषण',
       getStarted: 'शुरू करें',

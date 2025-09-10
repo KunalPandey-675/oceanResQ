@@ -45,7 +45,7 @@ const Footer = () => {
                 <Waves className="h-6 w-6 text-white" />
               </div>
               <div>
-                <span className="text-2xl font-bold text-white">ResQ</span>
+                <span className="text-2xl font-bold text-white">OceanResQ</span>
                 <p className="text-sm text-gray-400 -mt-1">Ocean Safety</p>
               </div>
             </div>
@@ -61,7 +61,6 @@ const Footer = () => {
                 Emergency Contacts
               </h4>
               <div className="space-y-1 text-sm">
-                <p>🇺🇸 USA: 911</p>
                 <p>🇮🇳 India: 112</p>
                 <p>🌊 Coast Guard: 1-800-424-8802</p>
               </div>
@@ -155,7 +154,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
-              <p>&copy; 2024 ResQ. All rights reserved.</p>
+              <p>&copy; 2025 OceanResQ. All rights reserved.</p>
               <div className="flex items-center space-x-4">
                 <span className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>

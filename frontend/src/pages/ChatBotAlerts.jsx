@@ -32,7 +32,7 @@ const ChatBotAlerts = () => {
     {
       id: 1,
       type: 'bot',
-      content: '🤖 Welcome to ResQ Alert System! I monitor social media and messaging platforms for ocean hazard reports.',
+      content: '🤖 Welcome to OceanResQ Alert System! I monitor social media and messaging platforms for ocean hazard reports.',
       timestamp: new Date(Date.now() - 60000),
       severity: 'info'
     },
@@ -250,7 +250,6 @@ const ChatBotAlerts = () => {
                   Emergency Contacts
                 </h3>
                 <div className="space-y-1 text-sm">
-                  <p>🇺🇸 USA: 911</p>
                   <p>🇮🇳 India: 112</p>
                   <p>🌊 Coast Guard: 1-800-424-8802</p>
                 </div>
