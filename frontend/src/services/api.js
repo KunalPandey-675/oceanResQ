@@ -82,7 +82,7 @@ export const analyticsAPI = {
 // Status API
 export const statusAPI = {
   getStatus: () => api.get('/status'),
-  getHealth: () => api.get('/status/health'),
+  getHealth: () => api.get('/health'),
   getMetrics: () => api.get('/status/metrics'),
   createAlert: (data) => api.post('/status/alert', data),
 };

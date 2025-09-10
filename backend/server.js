@@ -7,12 +7,16 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const app = express();
+const allowedOrigins = [
+  'https://ocean-res-q.vercel.app', // Vercel frontend
+  'http://localhost:5173'           // Local dev (optional)
+];
 
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true // if you use cookies/auth
 }));
 
 // Rate limiting
