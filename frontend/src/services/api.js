@@ -39,8 +39,8 @@ api.interceptors.response.use(
 
 // Reports API
 export const reportsAPI = {
-  getAll: (params = {}) => api.get('/reports', { params }),
-  getById: (id) => api.get(`/reports/${id}`),
+  getAll: (params = {}) => api.get('/api/reports', { params }),
+  getById: (id) => api.get(`/api/reports/${id}`),
   create: (data) => {
     const formData = new FormData();
     
@@ -58,33 +58,33 @@ export const reportsAPI = {
       });
     }
     
-    return api.post('/reports', formData, {
+    return api.post('/api/reports', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
   },
-  update: (id, data) => api.put(`/reports/${id}`, data),
-  delete: (id) => api.delete(`/reports/${id}`),
-  getRecent: () => api.get('/reports/recent'),
+  update: (id, data) => api.put(`/api/reports/${id}`, data),
+  delete: (id) => api.delete(`/api/reports/${id}`),
+  getRecent: () => api.get('/api/reports/recent'),
   getNearby: (lat, lng, radius = 10) => 
-    api.get('/reports/location/nearby', { params: { lat, lng, radius } }),
+    api.get('/api/reports/location/nearby', { params: { lat, lng, radius } }),
 };
 
 // Analytics API
 export const analyticsAPI = {
-  getAnalytics: (timeframe = '30d') => api.get('/analytics', { params: { timeframe } }),
-  getDashboard: () => api.get('/analytics/dashboard'),
+  getAnalytics: (timeframe = '30d') => api.get('/api/analytics', { params: { timeframe } }),
+  getDashboard: () => api.get('/api/analytics/dashboard'),
   exportData: (format = 'json', timeframe = '30d') => 
-    api.get('/analytics/export', { params: { format, timeframe } }),
+    api.get('/api/analytics/export', { params: { format, timeframe } }),
 };
 
 // Status API
 export const statusAPI = {
-  getStatus: () => api.get('/status'),
-  getHealth: () => api.get('/health'),
-  getMetrics: () => api.get('/status/metrics'),
-  createAlert: (data) => api.post('/status/alert', data),
+  getStatus: () => api.get('/api/status'),
+  getHealth: () => api.get('/api/health'),
+  getMetrics: () => api.get('/api/status/metrics'),
+  createAlert: (data) => api.post('/api/status/alert', data),
 };
 
 // Upload API
@@ -92,7 +92,7 @@ export const uploadAPI = {
   uploadSingle: (file) => {
     const formData = new FormData();
     formData.append('file', file);
-    return api.post('/upload/single', formData, {
+    return api.post('/api/upload/single', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -103,15 +103,15 @@ export const uploadAPI = {
     files.forEach(file => {
       formData.append('files', file);
     });
-    return api.post('/upload/multiple', formData, {
+    return api.post('/api/upload/multiple', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
   },
-  getFile: (filename) => api.get(`/upload/${filename}`, { responseType: 'blob' }),
-  deleteFile: (filename) => api.delete(`/upload/${filename}`),
-  getFileInfo: (filename) => api.get(`/upload/info/${filename}`),
+  getFile: (filename) => api.get(`/api/upload/${filename}`, { responseType: 'blob' }),
+  deleteFile: (filename) => api.delete(`/api/upload/${filename}`),
+  getFileInfo: (filename) => api.get(`/api/upload/info/${filename}`),
 };
 
 // Utility functions
