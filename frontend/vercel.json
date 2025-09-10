@@ -1,4 +1,9 @@
 {
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://oceanresq.onrender.com/api"
+    }
+  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]

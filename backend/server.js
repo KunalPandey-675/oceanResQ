@@ -9,13 +9,29 @@ require('dotenv').config();
 const app = express();
 const allowedOrigins = [
   'https://ocean-res-q.vercel.app', // Vercel frontend
-  'http://localhost:5173'           // Local dev (optional)
+  'https://oceanresq.vercel.app',   // Alternative Vercel URL
+  'https://ocean-res-q-git-main-kunalpandey-675s-projects.vercel.app', // Git branch URL
+  'https://ocean-res-q-git-main.vercel.app', // Alternative Git URL
+  'http://localhost:5173',          // Local dev (optional)
+  'http://localhost:3000'           // Alternative local dev
 ];
+
+console.log('Allowed CORS origins:', allowedOrigins);
 
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true // if you use cookies/auth
 }));
 
@@ -47,6 +63,23 @@ app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/status', require('./routes/status'));
 app.use('/api/upload', require('./routes/upload'));
 
+// Root route for debugging
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'ResQ API Server is running',
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    service: 'ResQ API',
+    endpoints: [
+      '/api/health',
+      '/api/reports',
+      '/api/analytics',
+      '/api/status',
+      '/api/upload'
+    ]
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ 
@@ -54,6 +87,23 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     service: 'ResQ API'
   });
+});
+
+// Legacy routes for backward compatibility (will redirect to /api)
+app.get('/analytics/dashboard', (req, res) => {
+  res.redirect('/api/analytics/dashboard');
+});
+
+app.get('/status', (req, res) => {
+  res.redirect('/api/status');
+});
+
+app.get('/reports', (req, res) => {
+  res.redirect('/api/reports');
+});
+
+app.get('/reports/recent', (req, res) => {
+  res.redirect('/api/reports/recent');
 });
 
 // Error handling middleware

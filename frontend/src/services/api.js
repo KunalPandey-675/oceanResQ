@@ -1,6 +1,37 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Get API base URL from environment variables
+const getApiBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  
+  // If we have an environment variable, use it
+  if (envUrl) {
+    // Ensure it ends with /api if it doesn't already
+    return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
+  }
+  
+  // Fallback logic for different environments
+  if (typeof window !== 'undefined') {
+    const { hostname, protocol } = window.location;
+    
+    // Production detection
+    if (hostname.includes('vercel.app') || hostname.includes('netlify.app')) {
+      return 'https://oceanresq.onrender.com/api';
+    }
+    
+    // Local development
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return 'http://localhost:5000/api';
+    }
+  }
+  
+  // Default fallback
+  return 'http://localhost:5000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
+
+console.log('API Base URL:', API_BASE_URL); // Debug log
 
 const api = axios.create({
   baseURL: API_BASE_URL,
