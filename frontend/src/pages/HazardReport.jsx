@@ -491,7 +491,7 @@ const HazardReport = () => {
                   name="contactPhone"
                   value={formData.contactPhone}
                   onChange={handleInputChange}
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+91 12345 67890"
                   className="input-field"
                 />
               </div>
